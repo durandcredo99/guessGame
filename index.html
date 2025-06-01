@@ -82,7 +82,127 @@ button {
   <div class="result" id="resultMsg"></div>
 
   <script>
-  const _0x44af17=_0x3ddb;function _0x4679(){const _0x35fca4=['addEventListener','156700bPueZr','userGuess','6UEDBPJ','getElementById','7574226XCoEyW','87075GLuoUb','normalize','Félicitations\x20!\x20Tu\x20as\x20deviné\x20tous\x20les\x20héros.','resultMsg','2663172uuFWvm','style','lightgreen','❌\x20Mauvaise\x20réponse.\x20La\x20bonne\x20réponse\x20était\x20:\x20','target','NFD','textContent','emojiClue','replace','score','124REeFpy','1314830ubtCqK','4138840nSgkPV','✅\x20Bravo\x20!\x20Bonne\x20réponse.','length','name','value','toLowerCase','disabled','color','604482CLPQsv','emoji','7QoAQzt'];_0x4679=function(){return _0x35fca4;};return _0x4679();}(function(_0x377ff1,_0x15ad6c){const _0x39ebac=_0x3ddb,_0x3941d=_0x377ff1();while(!![]){try{const _0x4beef2=parseInt(_0x39ebac(0xef))/0x1+parseInt(_0x39ebac(0xe6))/0x2*(parseInt(_0x39ebac(0xec))/0x3)+parseInt(_0x39ebac(0xfd))/0x4*(parseInt(_0x39ebac(0xea))/0x5)+-parseInt(_0x39ebac(0xee))/0x6+-parseInt(_0x39ebac(0xe8))/0x7*(-parseInt(_0x39ebac(0xff))/0x8)+-parseInt(_0x39ebac(0xf3))/0x9+parseInt(_0x39ebac(0xfe))/0xa;if(_0x4beef2===_0x15ad6c)break;else _0x3941d['push'](_0x3941d['shift']());}catch(_0x5271c9){_0x3941d['push'](_0x3941d['shift']());}}}(_0x4679,0xb7ff8));const heroes=[];let currentIndex=0x0,shuffledHeroes=[],score=0x0;function shuffle(_0x1b45e2){const _0x5edd3d=_0x3ddb;for(let _0x4f304c=_0x1b45e2[_0x5edd3d(0x101)]-0x1;_0x4f304c>0x0;_0x4f304c--){const _0x102bc8=Math['floor'](Math['random']()*(_0x4f304c+0x1));[_0x1b45e2[_0x4f304c],_0x1b45e2[_0x102bc8]]=[_0x1b45e2[_0x102bc8],_0x1b45e2[_0x4f304c]];}return _0x1b45e2;}function updateScore(){const _0x507a7e=_0x3ddb;document['getElementById'](_0x507a7e(0xfc))[_0x507a7e(0xf9)]=score;}function nextHero(){const _0x2dabda=_0x3ddb;if(currentIndex>=shuffledHeroes[_0x2dabda(0x101)]){document[_0x2dabda(0xed)](_0x2dabda(0xfa))[_0x2dabda(0xf9)]='🎉',document['getElementById'](_0x2dabda(0xf2))[_0x2dabda(0xf9)]=_0x2dabda(0xf1),document[_0x2dabda(0xed)](_0x2dabda(0xeb))[_0x2dabda(0xe4)]=!![];return;}const _0x4442c9=shuffledHeroes[currentIndex];document[_0x2dabda(0xed)](_0x2dabda(0xfa))[_0x2dabda(0xf9)]=_0x4442c9[_0x2dabda(0xe7)],document[_0x2dabda(0xed)](_0x2dabda(0xeb))[_0x2dabda(0xe2)]='',document[_0x2dabda(0xed)](_0x2dabda(0xf2))[_0x2dabda(0xf9)]='';}function checkGuess(){const _0x108a37=_0x3ddb,_0x12622a=document[_0x108a37(0xed)]('userGuess')['value']['trim']()[_0x108a37(0xe3)](),_0x2d08f3=document['getElementById'](_0x108a37(0xf2)),_0x457d30=shuffledHeroes[currentIndex];_0x12622a===_0x457d30[_0x108a37(0xe1)]?(score+=0x2,updateScore(),_0x2d08f3['textContent']=_0x108a37(0x100),_0x2d08f3[_0x108a37(0xf4)]['color']=_0x108a37(0xf5),currentIndex++,setTimeout(nextHero,0x384)):(_0x2d08f3[_0x108a37(0xf9)]=_0x108a37(0xf6)+_0x457d30[_0x108a37(0xe1)],_0x2d08f3[_0x108a37(0xf4)][_0x108a37(0xe5)]='black',currentIndex++,setTimeout(nextHero,0xfa0));}function _0x3ddb(_0x1187e5,_0x9e7cab){const _0x4679a3=_0x4679();return _0x3ddb=function(_0x3ddb73,_0x2f1b6e){_0x3ddb73=_0x3ddb73-0xe1;let _0x41abdf=_0x4679a3[_0x3ddb73];return _0x41abdf;},_0x3ddb(_0x1187e5,_0x9e7cab);}shuffledHeroes=shuffle([...heroes]),nextHero(),document['getElementById'](_0x44af17(0xeb))[_0x44af17(0xe9)]('input',function(_0x1624ba){const _0x1b8ef6=_0x44af17;let _0x4c7759=_0x1624ba[_0x1b8ef6(0xf7)][_0x1b8ef6(0xe2)];_0x4c7759=_0x4c7759[_0x1b8ef6(0xf0)](_0x1b8ef6(0xf8))[_0x1b8ef6(0xfb)](/[\u0300-\u036f]/g,''),_0x4c7759=_0x4c7759[_0x1b8ef6(0xfb)](/[^a-zA-Z\s'-]/g,''),_0x1624ba[_0x1b8ef6(0xf7)][_0x1b8ef6(0xe2)]=_0x4c7759;});
+    const heroes = [
+      { name: "leomord", emoji: "⚔️🐎🏇" },
+      { name: "zilong", emoji: "🗡️🐉🏹" },
+      { name: "layla", emoji: "🔫👧💥" },
+      { name: "tigreal", emoji: "🛡️🔨✨" },
+      { name: "miya", emoji: "🏹❄️🌙" },
+      { name: "gusion", emoji: "🔪🧙🐱‍👤" },
+      { name: "hayabusa", emoji: "🐱‍👤🗡️🐱‍👤" },
+      { name: "lancelot", emoji: "🤺🌹💨" },
+      { name: "karina", emoji: "🧝‍♀️🔪🐱‍👤" },
+      { name: "fanny", emoji: "⚔️🛩💀" },
+      { name: "helcurt", emoji: "🌑🐱‍👤🗡️" },
+      { name: "alice", emoji: "🧛‍♀️🩸🌀" },
+      { name: "aurora", emoji: "❄️👑💎" },
+      { name: "eudora", emoji: "⚡🧙‍♀️🌩️" },
+      { name: "clint", emoji: "🤠🔫⭐" },
+      { name: "moskov", emoji: "🏹🧟‍♂️🟣" },
+      { name: "alucard", emoji: "🗡️🧛‍♂️🔋" },
+      { name: "freya", emoji: "⚒️🛡️👸" },
+      { name: "jawhead", emoji: "🤖👧🛠️" },
+      { name: "granger", emoji: "🎻🔫🖤" },
+      { name: "brody", emoji: "🔫⚡🖤" },
+      { name: "beatrix", emoji: "🔫👩‍🔧🎯" },
+      { name: "x-borg", emoji: "🔥🤖💥" },
+      { name: "valir", emoji: "🔥🧙‍♂️🌋" },
+      { name: "gord", emoji: "🌀🧙‍♂️💫" },
+      { name: "harith", emoji: "🧙‍♂️🧒💨" },
+      { name: "ling", emoji: "🐱‍👤🗡️🦢" },
+      { name: "estes", emoji: "✨🌿🧙‍♂️" },
+      { name: "rafaela", emoji: "👼🌟❤️" },
+      { name: "mathilda", emoji: "🧙‍♀️🦅🌀" },
+      { name: "tigreal", emoji: "🛡️✨⚔️" },
+      { name: "atlas", emoji: "🤖❄️⚓" },
+      { name: "angela", emoji: "🧸🧙‍♀️💞" },
+      { name: "luo yi", emoji: "☯️🔮🐲" },
+      { name: "cecilion", emoji: "🦇🧛‍♂️🎶" },
+      { name: "carmilla", emoji: "🩸👸🛡️" },
+      { name: "alpha", emoji: "🤖🗡️🧪" },
+      { name: "roger", emoji: "🐺🔫🌕" },
+      { name: "sun", emoji: "🐒🗡️🌞" },
+      { name: "badang", emoji: "👊🌊🏋️" },
+      { name: "khufra", emoji: "🧟‍♂️🌵🌀" },
+      { name: "baxia", emoji: "🐢🛡️🔥" },
+      { name: "grock", emoji: "🗿🛡️💪" },
+      { name: "bane", emoji: "🦑⚓🍷" },
+      { name: "lunox", emoji: "🌕🌑🧙‍♀️" },
+      { name: "chang’e", emoji: "🌙🐇✨" },
+      { name: "nana", emoji: "🐱💫🎀" },
+      { name: "popol", emoji: "🐺🧒🦮" },
+      { name: "karrie", emoji: "🔫👣🌀" },
+      { name: "wanwan", emoji: "🏹🐯🌀" },
+      { name: "yve", emoji: "🌌🛸🔷" }
+    ];
+
+    let currentIndex = 0;
+    let shuffledHeroes = [];
+    let score = 0;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function updateScore() {
+      document.getElementById("score").textContent = score;
+    }
+
+    function nextHero() {
+      if (currentIndex >= shuffledHeroes.length) {
+        document.getElementById("emojiClue").textContent = "🎉";
+        document.getElementById("resultMsg").textContent = "Félicitations ! Tu as deviné tous les héros.";
+        document.getElementById("userGuess").disabled = true;
+        return;
+      }
+
+      const hero = shuffledHeroes[currentIndex];
+      document.getElementById("emojiClue").textContent = hero.emoji;
+      document.getElementById("userGuess").value = "";
+      document.getElementById("resultMsg").textContent = "";
+    }
+
+    function checkGuess() {
+      const input = document.getElementById("userGuess").value.trim().toLowerCase();
+      const result = document.getElementById("resultMsg");
+      const hero = shuffledHeroes[currentIndex];
+
+      if (input === hero.name) {
+        score += 2;
+        updateScore();
+        result.textContent = "✅ Bravo ! Bonne réponse.";
+        result.style.color = "lightgreen";
+        currentIndex++;
+        setTimeout(nextHero, 900); // Attend 1 seconde avant de passer au suivant
+      } else {
+        result.textContent = `❌ Mauvaise réponse. La bonne réponse était : ${hero.name}`;
+        result.style.color = "black";
+        currentIndex++;
+        setTimeout(nextHero, 4000); // Passe au suivant après 1,5s
+      }
+    }
+
+    // Initialiser le jeu
+    shuffledHeroes = shuffle([...heroes]);
+    nextHero();
+    
+  // Nettoyage de la saisie utilisateur
+  document.getElementById("userGuess").addEventListener("input", function (e) {
+    let value = e.target.value;
+
+    // Convertir les caractères accentués (comme é, è, ê) en leur équivalent non accentué
+    value = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Autoriser seulement lettres, espaces, tirets et apostrophes
+    value = value.replace(/[^a-zA-Z\s'-]/g, "");
+
+    // Mettre à jour la valeur nettoyée
+    e.target.value = value;
+  });
   </script>
 
 </body>
