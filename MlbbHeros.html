@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Jeu MLBB - Devine le héros</title>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  font-size: 5vw; 
+  color: #181818;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.emoji {
+  font-size: 3rem;
+  margin: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  width: 80%;
+  max-width: 300px;
+}
+
+button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.score {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #201b3f;
+}
+  </style>
+</head>
+<body>
+    <img class="background-img" src="./assets/images/changebackgroud.jpg" alt="background">
+
+  <h1>Devine le héros MLBB 🧠</h1>
+  <div class="score">Score : <span id="score">0</span></div>
+  <div class="emoji" id="emojiClue">🧠</div>
+  <input type="text" id="userGuess" placeholder="Entrez le nom du héros...">
+  <br>
+  <button onclick="checkGuess()">Valider</button>
+
+  <div class="result" id="resultMsg"></div>
+
+  <script>
+    const heroes = [
+      { name: "leomord", emoji: "⚔️🐎🏇" },
+      { name: "zilong", emoji: "🗡️🐉🏹" },
+      { name: "layla", emoji: "🔫👧💥" },
+      { name: "tigreal", emoji: "🛡️🔨✨" },
+      { name: "miya", emoji: "🏹❄️🌙" },
+      { name: "gusion", emoji: "🔪🧙🐱‍👤" },
+      { name: "hayabusa", emoji: "🐱‍👤🗡️🐱‍👤" },
+      { name: "lancelot", emoji: "🤺🌹💨" },
+      { name: "karina", emoji: "🧝‍♀️🔪🐱‍👤" },
+      { name: "fanny", emoji: "⚔️🛩💀" },
+      { name: "helcurt", emoji: "🌑🐱‍👤🗡️" },
+      { name: "alice", emoji: "🧛‍♀️🩸🌀" },
+      { name: "aurora", emoji: "❄️👑💎" },
+      { name: "eudora", emoji: "⚡🧙‍♀️🌩️" },
+      { name: "clint", emoji: "🤠🔫⭐" },
+      { name: "moskov", emoji: "🏹🧟‍♂️🟣" },
+      { name: "alucard", emoji: "🗡️🧛‍♂️🔋" },
+      { name: "freya", emoji: "⚒️🛡️👸" },
+      { name: "jawhead", emoji: "🤖👧🛠️" },
+      { name: "granger", emoji: "🎻🔫🖤" },
+      { name: "brody", emoji: "🔫⚡🖤" },
+      { name: "beatrix", emoji: "🔫👩‍🔧🎯" },
+      { name: "x-borg", emoji: "🔥🤖💥" },
+      { name: "valir", emoji: "🔥🧙‍♂️🌋" },
+      { name: "gord", emoji: "🌀🧙‍♂️💫" },
+      { name: "harith", emoji: "🧙‍♂️🧒💨" },
+      { name: "ling", emoji: "🐱‍👤🗡️🦢" },
+      { name: "estes", emoji: "✨🌿🧙‍♂️" },
+      { name: "rafaela", emoji: "👼🌟❤️" },
+      { name: "mathilda", emoji: "🧙‍♀️🦅🌀" },
+      { name: "tigreal", emoji: "🛡️✨⚔️" },
+      { name: "atlas", emoji: "🤖❄️⚓" },
+      { name: "angela", emoji: "🧸🧙‍♀️💞" },
+      { name: "luo yi", emoji: "☯️🔮🐲" },
+      { name: "cecilion", emoji: "🦇🧛‍♂️🎶" },
+      { name: "carmilla", emoji: "🩸👸🛡️" },
+      { name: "alpha", emoji: "🤖🗡️🧪" },
+      { name: "roger", emoji: "🐺🔫🌕" },
+      { name: "sun", emoji: "🐒🗡️🌞" },
+      { name: "badang", emoji: "👊🌊🏋️" },
+      { name: "khufra", emoji: "🧟‍♂️🌵🌀" },
+      { name: "baxia", emoji: "🐢🛡️🔥" },
+      { name: "grock", emoji: "🗿🛡️💪" },
+      { name: "bane", emoji: "🦑⚓🍷" },
+      { name: "lunox", emoji: "🌕🌑🧙‍♀️" },
+      { name: "chang’e", emoji: "🌙🐇✨" },
+      { name: "nana", emoji: "🐱💫🎀" },
+      { name: "popol", emoji: "🐺🧒🦮" },
+      { name: "karrie", emoji: "🔫👣🌀" },
+      { name: "wanwan", emoji: "🏹🐯🌀" },
+      { name: "yve", emoji: "🌌🛸🔷" }
+    ];
+
+    let currentIndex = 0;
+    let shuffledHeroes = [];
+    let score = 0;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function updateScore() {
+      document.getElementById("score").textContent = score;
+    }
+
+    function nextHero() {
+      if (currentIndex >= shuffledHeroes.length) {
+        document.getElementById("emojiClue").textContent = "🎉";
+        document.getElementById("resultMsg").textContent = "Félicitations ! Tu as deviné tous les héros.";
+        document.getElementById("userGuess").disabled = true;
+        return;
+      }
+
+      const hero = shuffledHeroes[currentIndex];
+      document.getElementById("emojiClue").textContent = hero.emoji;
+      document.getElementById("userGuess").value = "";
+      document.getElementById("resultMsg").textContent = "";
+    }
+
+    function checkGuess() {
+      const input = document.getElementById("userGuess").value.trim().toLowerCase();
+      const result = document.getElementById("resultMsg");
+      const hero = shuffledHeroes[currentIndex];
+
+      if (input === hero.name) {
+        score += 2;
+        updateScore();
+        result.textContent = "✅ Bravo ! Bonne réponse.";
+        result.style.color = "lightgreen";
+        currentIndex++;
+        setTimeout(nextHero, 900); // Attend 1 seconde avant de passer au suivant
+      } else {
+        result.textContent = `❌ Mauvaise réponse. La bonne réponse était : ${hero.name}`;
+        result.style.color = "black";
+        currentIndex++;
+        setTimeout(nextHero, 4000); // Passe au suivant après 1,5s
+      }
+    }
+
+    // Initialiser le jeu
+    shuffledHeroes = shuffle([...heroes]);
+    nextHero();
+    
+  // Nettoyage de la saisie utilisateur
+  document.getElementById("userGuess").addEventListener("input", function (e) {
+    let value = e.target.value;
+
+    // Convertir les caractères accentués (comme é, è, ê) en leur équivalent non accentué
+    value = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Autoriser seulement lettres, espaces, tirets et apostrophes
+    value = value.replace(/[^a-zA-Z\s'-]/g, "");
+
+    // Mettre à jour la valeur nettoyée
+    e.target.value = value;
+  });
+  </script>
+
+</body>
+</html>

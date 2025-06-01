@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Jeu MLBB - Devine le héros</title>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  font-size: 5vw; 
+  color: #181818;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.emoji {
+  font-size: 3rem;
+  margin: 1rem;
+}
+
+input[type="text"] {
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  width: 80%;
+  max-width: 300px;
+}
+
+button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.score {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #201b3f;
+}
+  </style>
+</head>
+<body>
+    <img class="background-img" src="./assets/images/changebackgroud.jpg" alt="background">
+
+  <h1>Devine le héros MLBB 🧠</h1>
+  <div class="score">Score : <span id="score">0</span></div>
+  <div class="emoji" id="emojiClue">🧠</div>
+  <input type="text" id="userGuess" placeholder="Entrez le nom du héros...">
+  <br>
+  <button onclick="checkGuess()">Valider</button>
+
+  <div class="result" id="resultMsg"></div>
+
+  <script>
+  const _0x44af17=_0x3ddb;function _0x4679(){const _0x35fca4=['addEventListener','156700bPueZr','userGuess','6UEDBPJ','getElementById','7574226XCoEyW','87075GLuoUb','normalize','Félicitations\x20!\x20Tu\x20as\x20deviné\x20tous\x20les\x20héros.','resultMsg','2663172uuFWvm','style','lightgreen','❌\x20Mauvaise\x20réponse.\x20La\x20bonne\x20réponse\x20était\x20:\x20','target','NFD','textContent','emojiClue','replace','score','124REeFpy','1314830ubtCqK','4138840nSgkPV','✅\x20Bravo\x20!\x20Bonne\x20réponse.','length','name','value','toLowerCase','disabled','color','604482CLPQsv','emoji','7QoAQzt'];_0x4679=function(){return _0x35fca4;};return _0x4679();}(function(_0x377ff1,_0x15ad6c){const _0x39ebac=_0x3ddb,_0x3941d=_0x377ff1();while(!![]){try{const _0x4beef2=parseInt(_0x39ebac(0xef))/0x1+parseInt(_0x39ebac(0xe6))/0x2*(parseInt(_0x39ebac(0xec))/0x3)+parseInt(_0x39ebac(0xfd))/0x4*(parseInt(_0x39ebac(0xea))/0x5)+-parseInt(_0x39ebac(0xee))/0x6+-parseInt(_0x39ebac(0xe8))/0x7*(-parseInt(_0x39ebac(0xff))/0x8)+-parseInt(_0x39ebac(0xf3))/0x9+parseInt(_0x39ebac(0xfe))/0xa;if(_0x4beef2===_0x15ad6c)break;else _0x3941d['push'](_0x3941d['shift']());}catch(_0x5271c9){_0x3941d['push'](_0x3941d['shift']());}}}(_0x4679,0xb7ff8));const heroes=[];let currentIndex=0x0,shuffledHeroes=[],score=0x0;function shuffle(_0x1b45e2){const _0x5edd3d=_0x3ddb;for(let _0x4f304c=_0x1b45e2[_0x5edd3d(0x101)]-0x1;_0x4f304c>0x0;_0x4f304c--){const _0x102bc8=Math['floor'](Math['random']()*(_0x4f304c+0x1));[_0x1b45e2[_0x4f304c],_0x1b45e2[_0x102bc8]]=[_0x1b45e2[_0x102bc8],_0x1b45e2[_0x4f304c]];}return _0x1b45e2;}function updateScore(){const _0x507a7e=_0x3ddb;document['getElementById'](_0x507a7e(0xfc))[_0x507a7e(0xf9)]=score;}function nextHero(){const _0x2dabda=_0x3ddb;if(currentIndex>=shuffledHeroes[_0x2dabda(0x101)]){document[_0x2dabda(0xed)](_0x2dabda(0xfa))[_0x2dabda(0xf9)]='🎉',document['getElementById'](_0x2dabda(0xf2))[_0x2dabda(0xf9)]=_0x2dabda(0xf1),document[_0x2dabda(0xed)](_0x2dabda(0xeb))[_0x2dabda(0xe4)]=!![];return;}const _0x4442c9=shuffledHeroes[currentIndex];document[_0x2dabda(0xed)](_0x2dabda(0xfa))[_0x2dabda(0xf9)]=_0x4442c9[_0x2dabda(0xe7)],document[_0x2dabda(0xed)](_0x2dabda(0xeb))[_0x2dabda(0xe2)]='',document[_0x2dabda(0xed)](_0x2dabda(0xf2))[_0x2dabda(0xf9)]='';}function checkGuess(){const _0x108a37=_0x3ddb,_0x12622a=document[_0x108a37(0xed)]('userGuess')['value']['trim']()[_0x108a37(0xe3)](),_0x2d08f3=document['getElementById'](_0x108a37(0xf2)),_0x457d30=shuffledHeroes[currentIndex];_0x12622a===_0x457d30[_0x108a37(0xe1)]?(score+=0x2,updateScore(),_0x2d08f3['textContent']=_0x108a37(0x100),_0x2d08f3[_0x108a37(0xf4)]['color']=_0x108a37(0xf5),currentIndex++,setTimeout(nextHero,0x384)):(_0x2d08f3[_0x108a37(0xf9)]=_0x108a37(0xf6)+_0x457d30[_0x108a37(0xe1)],_0x2d08f3[_0x108a37(0xf4)][_0x108a37(0xe5)]='black',currentIndex++,setTimeout(nextHero,0xfa0));}function _0x3ddb(_0x1187e5,_0x9e7cab){const _0x4679a3=_0x4679();return _0x3ddb=function(_0x3ddb73,_0x2f1b6e){_0x3ddb73=_0x3ddb73-0xe1;let _0x41abdf=_0x4679a3[_0x3ddb73];return _0x41abdf;},_0x3ddb(_0x1187e5,_0x9e7cab);}shuffledHeroes=shuffle([...heroes]),nextHero(),document['getElementById'](_0x44af17(0xeb))[_0x44af17(0xe9)]('input',function(_0x1624ba){const _0x1b8ef6=_0x44af17;let _0x4c7759=_0x1624ba[_0x1b8ef6(0xf7)][_0x1b8ef6(0xe2)];_0x4c7759=_0x4c7759[_0x1b8ef6(0xf0)](_0x1b8ef6(0xf8))[_0x1b8ef6(0xfb)](/[\u0300-\u036f]/g,''),_0x4c7759=_0x4c7759[_0x1b8ef6(0xfb)](/[^a-zA-Z\s'-]/g,''),_0x1624ba[_0x1b8ef6(0xf7)][_0x1b8ef6(0xe2)]=_0x4c7759;});
+  </script>
+
+</body>
+</html>
