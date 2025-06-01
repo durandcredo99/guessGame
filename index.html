@@ -82,6 +82,7 @@ button {
   <div class="result" id="resultMsg"></div>
 
   <script>
+    window.onload = function () {
     const heroes = [
       { name: "leomord", emoji: "⚔️🐎🏇" },
       { name: "zilong", emoji: "🗡️🐉🏹" },
@@ -152,39 +153,62 @@ button {
       document.getElementById("score").textContent = score;
     }
 
-    function nextHero() {
-      if (currentIndex >= shuffledHeroes.length) {
-        document.getElementById("emojiClue").textContent = "🎉";
-        document.getElementById("resultMsg").textContent = "Félicitations ! Tu as deviné tous les héros.";
-        document.getElementById("userGuess").disabled = true;
-        return;
-      }
+   function nextHero() {
+  if (currentIndex >= shuffledHeroes.length) {
+    document.getElementById("emojiClue").textContent = "🎉";
+    document.getElementById("resultMsg").textContent = "Merci d'avoir joué jeune Nab";
+    document.getElementById("userGuess").disabled = true;
+    document.querySelector("button").disabled = true; // désactiver le bouton aussi
+    return;
+  }
 
-      const hero = shuffledHeroes[currentIndex];
-      document.getElementById("emojiClue").textContent = hero.emoji;
-      document.getElementById("userGuess").value = "";
-      document.getElementById("resultMsg").textContent = "";
-    }
+  const hero = shuffledHeroes[currentIndex];
+  const inputField = document.getElementById("userGuess");
+  const button = document.querySelector("button");
+
+  document.getElementById("emojiClue").textContent = hero.emoji;
+  inputField.value = "";
+  document.getElementById("resultMsg").textContent = "";
+
+  button.disabled = false;
+  inputField.disabled = false;
+}
+
 
     function checkGuess() {
-      const input = document.getElementById("userGuess").value.trim().toLowerCase();
-      const result = document.getElementById("resultMsg");
-      const hero = shuffledHeroes[currentIndex];
+  const inputField = document.getElementById("userGuess");
+  const input = inputField.value.trim().toLowerCase();
+  const result = document.getElementById("resultMsg");
+  const hero = shuffledHeroes[currentIndex];
+  const button = document.querySelector("button");
 
-      if (input === hero.name) {
-        score += 2;
-        updateScore();
-        result.textContent = "✅ Bravo ! Bonne réponse.";
-        result.style.color = "lightgreen";
-        currentIndex++;
-        setTimeout(nextHero, 900); // Attend 1 seconde avant de passer au suivant
-      } else {
-        result.textContent = `❌ Mauvaise réponse. La bonne réponse était : ${hero.name}`;
-        result.style.color = "black";
-        currentIndex++;
-        setTimeout(nextHero, 4000); // Passe au suivant après 1,5s
-      }
-    }
+  // Empêcher double clic pendant la transition
+  button.disabled = true;
+  inputField.disabled = true;
+
+  if (input === hero.name) {
+    score += 2;
+    updateScore();
+    result.textContent = "✅ Bravo ! Bonne réponse.";
+    result.style.color = "lightblack";
+    currentIndex++;
+    setTimeout(() => {
+      button.disabled = false;
+      inputField.disabled = false;
+      nextHero();
+    }, 900); // Avancer rapidement si bonne réponse
+  } else {
+    result.textContent = `❌ Mauvaise réponse. La bonne réponse était : ${hero.name}`;
+    result.style.color = "black";
+    currentIndex++;
+    setTimeout(() => {
+      button.disabled = false;
+      inputField.disabled = false;
+      nextHero();
+    }, 3000); // Attente plus longue si mauvaise réponse
+  }
+}
+
 
     // Initialiser le jeu
     shuffledHeroes = shuffle([...heroes]);
@@ -203,6 +227,8 @@ button {
     // Mettre à jour la valeur nettoyée
     e.target.value = value;
   });
+  window.checkGuess = checkGuess; // rendre accessible au bouton onclick
+};
   </script>
 
 </body>
